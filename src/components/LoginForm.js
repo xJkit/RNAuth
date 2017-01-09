@@ -1,29 +1,37 @@
 import React, { Component } from 'react';
-import { Text, TextInput } from 'react-native';
-import { Button, Card, CardSection } from './common';
+import { Button, Card, CardSection, Input } from './common';
 
 class LoginForm extends Component {
-
   state = {
-    text: '123',
+    account: null,
+    password: null,
+  }
+
+  showResult() {
+    const { account, password } = this.state;
+    console.log(`帳號：${account}, 密碼：${password}`);
   }
 
   render() {
-    const { word } = this.state;
+    const { account, password } = this.state;
     return (
       <Card>
         <CardSection>
-          <Text>{ word }</Text>
-          <TextInput
-            style={styles.textInputStyle}
-            onChange={text => this.setState({ text })}
+          <Input
+            label="帳號"
+            value={account}
+            onChangeText={text => this.setState({ account: text })}
           />
         </CardSection>
         <CardSection>
-          <Text>Password</Text>
+          <Input
+            label="密碼"
+            value={password}
+            onChangeText={text => this.setState({ password: text })}
+          />
         </CardSection>
         <CardSection>
-          <Button>
+          <Button onPress={() => this.showResult()}>
             Register
           </Button>
         </CardSection>
@@ -31,13 +39,5 @@ class LoginForm extends Component {
     );
   }
 }
-
-const styles = {
-  textInputStyle: {
-    width: 20,
-    height: 20,
-    marginLeft: 5,
-  },
-};
 
 export default LoginForm;
