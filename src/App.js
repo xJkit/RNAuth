@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Text, Button } from 'react-native';
 import firebase from 'firebase';
-import { Header } from './components/common';
+import { Header, Spinner } from './components/common';
 import LoginForm from './components/LoginForm';
 
 class App extends Component {
+
+  state = {
+    loggedIn: null,
+  }
 
   componentWillMount() {
     // Initialize Firebase
@@ -16,13 +20,43 @@ class App extends Component {
       messagingSenderId: '612097248292'
     };
     firebase.initializeApp(config);
+
+    // check the loggedIn status
+    firebase.auth().onAuthStateChanged(user => {
+      if (user) {
+        this.setState({ loggedIn: true });
+        console.log('you are loggin in');
+      } else {
+        this.setState({ loggedIn: false });
+        console.log('you are logged out');
+      }
+    });
+  }
+
+  renderContent() {
+    switch (this.state.loggedIn) {
+      case false:
+        return <LoginForm />;
+      case true:
+        return (
+          <View>
+            <Text>You Are Already Logged In!.</Text>
+            <Button
+              onPress={() => firebase.auth().signOut()}
+              title="Log out"
+            />
+          </View>
+        );
+      default:
+        return <Spinner size="large" />;
+    }
   }
 
   render() {
     return (
       <View>
         <Header headerTitle="Authentication" />
-        <LoginForm />
+        {this.renderContent()}
       </View>
     );
   }
