@@ -20,19 +20,16 @@ const styles = {
     flexDirection: 'row',
     alignItems: 'center',
     flex: 1,
-    height: 40,
-    width: null,
+    height: 50,
   },
   labelStyle: {
     fontSize: 18,
     flex: 1,
+    paddingLeft: 20,
   },
   TextInputStyle: {
     flex: 4,
-    height: 28,
-    width: null,
     fontSize: 16,
-    alignSelf: 'center',
   },
 };
 
