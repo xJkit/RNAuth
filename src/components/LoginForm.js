@@ -20,14 +20,17 @@ class LoginForm extends Component {
           <Input
             label="帳號"
             value={account}
-            onChangeText={text => this.setState({ account: text })}
+            onChangeText={email => this.setState({ account: email })}
+            placeholder="user@gmail.com"
           />
         </CardSection>
         <CardSection>
           <Input
             label="密碼"
             value={password}
-            onChangeText={text => this.setState({ password: text })}
+            onChangeText={pwd => this.setState({ password: pwd })}
+            placeholder="enter your password"
+            secureTextEntry
           />
         </CardSection>
         <CardSection>
